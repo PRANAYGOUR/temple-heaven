@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Tourx</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@4.2.1/dist/aframe-event-set-component.min.js"></script>
+    <script src="js/Tour.js"></script>
+    <script src="https://cdn.aframe.io/fonts/Exo2Bold.fnt"></script>
+    <script src="js/CursorEvents.js"></script>
+    <script>
+      AFRAME.registerComponent('navigate-on-click', {
+        schema: {
+          url: {default: ''}
+        },
+    
+        init: function () {
+          var data = this.data;
+          var el = this.el;
+    
+          el.addEventListener('click', function () {
+            window.location.href = data.url;
+          });
+        }
+      });        
+    </script>
+  </head>
+  <body>
+    
+    <a-scene id="main-scene">
+
+
+      <a-sky
+        id="main-container"
+        radius="5000"
+        src="./assets/place-0.jpg"
+        rotation="0 -90 0"
+      ></a-sky>
+
+
+      <!-- Places Container -->
+      <a-entity id="places-container" cursor-listener tour></a-entity>
+      
+      <a-plane navigate-on-click="url: https://pranaygour.github.io/temple-heaven/" color="grey" width="20" height="9" position="-1 25 -50"
+      >
+      <a-text
+        color="#000000"
+        text="value: back; font:exo2bold;"
+        position="-3 0 0.3"scale="10 10 10">
+      </a-text>
+    </a-plane>
+
+
+      <!-- CAMERA -->
+      <a-camera id="camera" wasd-controls="acceleration:500;">
+        
+        <!-- App Title -->
+        <a-entity
+          id="app-title"
+          position="-0.08 0.73 -1"
+          text="font: exo2bold; align: center; width: 1.5; color: #e91e63; value: Temple of Heaven"
+          
+        >
+        
+        </a-entity>
+
+        <!-- CURSOR -->
+        <a-entity
+          id="camera-cursor"
+          cursor
+          position="0 0 -1"
+          geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
+          material="color: #283593; shader: flat"
+        >
+        </a-entity>
+        <!-- Back Button -->
+
+      
+      
+          
+        
+
+      </a-camera>
+      
+    </a-scene>
+    
+  </body>
+</html>
